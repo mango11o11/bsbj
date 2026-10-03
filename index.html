@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#F6F3EA">
+<title>八诗八景 · 沈约的诗词世界</title>
+<style>
+/* ============ 设计令牌：清爽现代的宣纸宋韵 ============ */
+:root{
+  --paper:#F6F3EA; --paper-2:#FBF9F2; --card:#FFFFFF;
+  --ink:#2B2B27; --ink-2:#5C5B52; --ink-3:#93917F;
+  --line:#EAE4D4; --line-2:#F1ECDD;
+  --jade:#4F7D5C; --jade-2:#3F6650; --jade-soft:#E7F0E8;
+  --water:#4E828A; --water-soft:#E4EFF0;
+  --gold:#B98B3E; --gold-2:#CBA25C; --gold-soft:#F4EAD5;
+  --moon:#7C89A6; --moon-soft:#EAECF4;
+  --snow:#6E7A93; --snow-soft:#ECEEF5;
+  --rose:#B45B54; --rose-soft:#F6E6E4;
+  --shadow:0 6px 22px rgba(60,58,45,.10);
+  --shadow-lg:0 18px 48px rgba(60,58,45,.20);
+  --r:18px; --r-sm:12px; --r-lg:26px;
+  --title:"Songti SC","Noto Serif CJK SC","Source Han Serif SC","STSong","SimSun",serif;
+  --body:-apple-system,BlinkMacSystemFont,"PingFang SC","HarmonyOS Sans SC","Microsoft YaHei",sans-serif;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html,body{margin:0;height:100%;}
+body{font-family:var(--body);color:var(--ink);background:
+  radial-gradient(1200px 600px at 20% -10%, #EFEADF 0%, transparent 60%),
+  radial-gradient(1000px 500px at 120% 10%, #E6EEE6 0%, transparent 55%),
+  linear-gradient(160deg,#F3EFE4,#EAF0EC);
+  display:flex;align-items:center;justify-content:center;min-height:100%;}
+::selection{background:var(--gold-soft);}
+
+/* ============ 手机外壳 ============ */
+.stage{padding:22px;}
+.phone{position:relative;width:400px;height:842px;max-height:calc(100vh - 44px);
+  background:var(--paper);border-radius:46px;padding:11px;
+  box-shadow:var(--shadow-lg),0 0 0 2px #fff inset;
+  border:1px solid #e4ddca;}
+.phone-inner{position:relative;width:100%;height:100%;border-radius:36px;overflow:hidden;
+  background:var(--paper);display:flex;flex-direction:column;}
+@media (max-width:460px){
+  body{background:var(--paper);}
+  .stage{padding:0;}
+  .phone{width:100vw;height:100vh;height:100dvh;max-height:none;border-radius:0;padding:0;border:0;box-shadow:none;}
+  .phone-inner{border-radius:0;}
+}
+
+/* status bar */
+.statusbar{height:44px;flex:none;display:flex;align-items:center;justify-content:space-between;
+  padding:0 22px 0 26px;font-size:13px;font-weight:600;color:var(--ink);letter-spacing:.5px;}
+.statusbar .sicons{display:flex;align-items:center;gap:6px;}
+.statusbar svg{display:block;}
+/* app bar */
+.appbar{flex:none;height:52px;display:flex;align-items:center;gap:8px;padding:0 14px 0 12px;position:relative;}
+.appbar .ab-title{font-family:var(--title);font-size:18px;font-weight:700;letter-spacing:1px;}
+.appbar .ab-back{width:34px;height:34px;border-radius:50%;border:0;background:transparent;display:none;
+  align-items:center;justify-content:center;cursor:pointer;color:var(--ink);font-size:20px;}
+.appbar .ab-back.show{display:flex;}
+.capsule{margin-left:auto;width:88px;height:32px;border-radius:16px;background:rgba(255,255,255,.72);
+  border:1px solid var(--line);display:flex;align-items:center;justify-content:center;gap:0;color:var(--ink-2);}
+.capsule .cp{flex:1;display:flex;align-items:center;justify-content:center;font-size:15px;}
+.capsule .cp+.cp{border-left:1px solid var(--line);}
+
+/* screens / scroll */
+.scroll{flex:1;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;position:relative;scroll-behavior:smooth;}
+.scroll::-webkit-scrollbar{width:0;}
+.page{display:none;animation:fade .32s ease;padding:0 16px 120px;}
+.page.active{display:block;}
+@keyframes fade{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:none;}}
+
+/* ============ 通用组件 ============ */
+.sec{margin-top:22px;}
+.sec-h{display:flex;align-items:baseline;justify-content:space-between;margin:0 2px 12px;}
+.sec-h .t{font-family:var(--title);font-size:18px;font-weight:700;letter-spacing:1px;}
+.sec-h .t small{font-size:11px;color:var(--ink-3);font-weight:400;letter-spacing:2px;margin-left:8px;font-family:var(--body);}
+.sec-h .more{font-size:12px;color:var(--jade);cursor:pointer;font-weight:600;}
+.card{background:var(--card);border-radius:var(--r);box-shadow:var(--shadow);border:1px solid var(--line-2);}
+.pad{padding:16px;}
+.tag{display:inline-flex;align-items:center;font-size:11px;padding:3px 9px;border-radius:999px;
+  background:var(--jade-soft);color:var(--jade-2);font-weight:600;letter-spacing:.5px;}
+.tag.gold{background:var(--gold-soft);color:#8a6a2f;}
+.tag.water{background:var(--water-soft);color:var(--water);}
+.tag.moon{background:var(--moon-soft);color:#566184;}
+.tag.rose{background:var(--rose-soft);color:var(--rose);}
+.btn{border:0;border-radius:999px;font-family:var(--body);font-weight:600;cursor:pointer;transition:.18s;font-size:14px;}
+.btn:active{transform:scale(.97);}
+.btn-p{background:linear-gradient(135deg,var(--jade),var(--jade-2));color:#fff;padding:12px 20px;box-shadow:0 6px 16px rgba(79,125,92,.32);}
+.btn-g{background:#fff;color:var(--jade-2);border:1px solid var(--jade);padding:11px 18px;}
+.btn-gold{background:linear-gradient(135deg,var(--gold-2),var(--gold));color:#fff;padding:12px 20px;box-shadow:0 6px 16px rgba(185,139,62,.3);}
+.btn-sm{padding:8px 14px;font-size:12.5px;}
+.btn-block{width:100%;}
+.icon-btn{width:40px;height:40px;border-radius:14px;background:var(--card);border:1px solid var(--line-2);
+  display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow);}
+.divider{height:1px;background:var(--line);margin:14px 0;}
+.chip{flex:none;padding:8px 14px;border-radius:999px;background:#fff;border:1px solid var(--line);font-size:13px;color:var(--ink-2);cursor:pointer;white-space:nowrap;transition:.15s;font-weight:500;}
+.chip.on{background:var(--ink);color:#fff;border-color:var(--ink);}
+.hscroll{display:flex;gap:10px;overflow-x:auto;padding:2px 2px 6px;}
+.hscroll::-webkit-scrollbar{height:0;}
+.pill-row{display:flex;gap:8px;}
+
+/* ============ 首页 ============ */
+.hero{position:relative;margin:6px -16px 0;padding:30px 20px 78px;color:#fff;overflow:hidden;
+  background:linear-gradient(150deg,#2F4A3A 0%,#3F6650 42%,#4E828A 100%);}
+.hero::after{content:"";position:absolute;inset:0;background:
+  radial-gradient(420px 200px at 88% -12%, rgba(203,162,92,.55), transparent 60%),
+  radial-gradient(360px 220px at -8% 112%, rgba(255,255,255,.16), transparent 60%);}
+.hero .h-kicker{font-size:12px;letter-spacing:6px;opacity:.85;font-family:var(--body);position:relative;z-index:2;}
+.hero h1{font-family:var(--title);font-size:34px;margin:8px 0 4px;letter-spacing:5px;position:relative;z-index:2;font-weight:700;}
+.hero .h-sub{font-size:13px;letter-spacing:3px;opacity:.9;position:relative;z-index:2;}
+.hero .h-verse{margin-top:16px;font-family:var(--title);font-size:14px;line-height:1.9;opacity:.92;position:relative;z-index:2;
+  border-left:2px solid rgba(255,255,255,.5);padding-left:12px;}
+.hero .h-deco{position:absolute;right:-10px;top:10px;opacity:.16;z-index:1;}
+.hero .h-deco text{fill:#fff;font-family:var(--title);font-size:120px;writing-mode:vertical-rl;letter-spacing:8px;}
+.quick{position:relative;z-index:3;margin:-52px 0 0;display:grid;grid-template-columns:repeat(5,1fr);gap:2px;
+  background:var(--card);border-radius:var(--r);box-shadow:var(--shadow);padding:16px 6px;}
+.quick .q{display:flex;flex-direction:column;align-items:center;gap:7px;cursor:pointer;}
+.quick .q .qi{width:46px;height:46px;border-radius:16px;display:flex;align-items:center;justify-content:center;transition:.2s;}
+.quick .q:active .qi{transform:scale(.9);}
+.quick .q span{font-size:11.5px;color:var(--ink-2);font-weight:500;}
+.qi.a{background:var(--jade-soft);color:var(--jade-2);} .qi.b{background:var(--water-soft);color:var(--water);}
+.qi.c{background:var(--gold-soft);color:#8a6a2f;} .qi.d{background:var(--moon-soft);color:#566184;} .qi.e{background:var(--rose-soft);color:var(--rose);}
+
+.prog{margin-top:16px;background:linear-gradient(135deg,#fff,#FBF9F2);border-radius:var(--r);padding:16px;box-shadow:var(--shadow);border:1px solid var(--line-2);}
+.prog .pr-top{display:flex;align-items:center;justify-content:space-between;}
+.prog .pr-top .lbl{font-family:var(--title);font-size:16px;font-weight:700;}
+.prog .pr-top .num{font-size:13px;color:var(--ink-3);} .prog .pr-top .num b{color:var(--jade);font-size:18px;font-family:var(--title);}
+.bar{height:10px;border-radius:999px;background:var(--line-2);margin:12px 0 8px;overflow:hidden;}
+.bar i{display:block;height:100%;border-radius:999px;background:linear-gradient(90deg,var(--jade),var(--gold-2));transition:width .5s;}
+.prog .seals{display:flex;gap:6px;margin-top:10px;}
+.prog .seals .s{flex:1;aspect-ratio:1;border-radius:9px;border:1.5px dashed var(--line);display:flex;align-items:center;justify-content:center;font-family:var(--title);font-size:13px;color:var(--ink-3);}
+.prog .seals .s.done{border:1.5px solid var(--rose);color:var(--rose);background:var(--rose-soft);box-shadow:0 0 0 2px rgba(180,91,84,.08);}
+
+.season{display:flex;gap:10px;overflow-x:auto;padding-bottom:4px;}
+.season::-webkit-scrollbar{height:0;}
+.scard{flex:none;width:150px;border-radius:var(--r);overflow:hidden;color:#fff;position:relative;box-shadow:var(--shadow);cursor:pointer;}
+.scard .sc-bg{height:98px;display:flex;align-items:center;justify-content:center;font-family:var(--title);font-size:44px;font-weight:700;opacity:.9;}
+.scard .sc-body{padding:10px 12px;background:rgba(0,0,0,.14);}
+.scard .sc-body .n{font-size:14px;font-weight:700;font-family:var(--title);}
+.scard .sc-body .d{font-size:11px;opacity:.85;margin-top:2px;}
+.sc-spring{background:linear-gradient(150deg,#7CA36B,#4F7D5C);} .sc-summer{background:linear-gradient(150deg,#4E828A,#2F514B);}
+.sc-autumn{background:linear-gradient(150deg,#CBA25C,#9C7B46);} .sc-winter{background:linear-gradient(150deg,#8892AB,#5B6884);}
+
+/* ============ 手绘地图 ============ */
+.map-wrap{background:linear-gradient(160deg,#FBF9F2,#F0EEDF);border-radius:var(--r-lg);padding:8px;box-shadow:var(--shadow);border:1px solid var(--line-2);position:relative;overflow:hidden;}
+.map-wrap svg{display:block;width:100%;height:auto;}
+.node{cursor:pointer;}
+.node circle.hit{fill:transparent;}
+.node .dot{transition:.2s;}
+.node.active .dot{r:20;}
+.node text{font-family:var(--title);pointer-events:none;}
+.route-info{margin-top:14px;}
+.rt-line{display:flex;gap:10px;align-items:flex-start;padding:12px 0;border-bottom:1px dashed var(--line);}
+.rt-line:last-child{border:0;}
+.rt-line .rk{flex:none;width:26px;height:26px;border-radius:50%;background:var(--jade);color:#fff;font-family:var(--title);display:flex;align-items:center;justify-content:center;font-size:13px;}
+.rt-line .rt{font-size:13px;color:var(--ink-2);line-height:1.7;} .rt-line .rt b{color:var(--ink);font-family:var(--title);font-size:14px;}
+
+/* ============ 卡片网格 ============ */
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.zcard{background:var(--card);border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow);cursor:pointer;border:1px solid var(--line-2);transition:.2s;}
+.zcard:active{transform:translateY(2px);}
+.zcard .zc-top{height:92px;display:flex;align-items:center;justify-content:center;position:relative;}
+.zcard .zc-top svg{width:44px;height:44px;}
+.zcard .zc-no{position:absolute;left:10px;top:8px;font-family:var(--title);font-size:12px;color:#fff;background:rgba(0,0,0,.18);padding:2px 8px;border-radius:999px;}
+.zcard .zc-body{padding:11px 12px 13px;}
+.zcard .zc-body .n{font-family:var(--title);font-size:15px;font-weight:700;}
+.zcard .zc-body .k{font-size:11.5px;color:var(--jade-2);margin-top:3px;font-weight:600;}
+.zcard .zc-body .v{font-size:11px;color:var(--ink-3);margin-top:5px;line-height:1.5;}
+
+/* ============ AR ============ */
+.ar-scan{background:radial-gradient(140px 90px at 50% 30%, rgba(78,130,138,.28), transparent),linear-gradient(160deg,#26332C,#33463D);
+  border-radius:var(--r-lg);padding:26px;text-align:center;color:#fff;position:relative;overflow:hidden;box-shadow:var(--shadow);}
+.ar-frame{width:170px;height:170px;margin:6px auto 16px;position:relative;border-radius:16px;
+  background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.18);display:flex;align-items:center;justify-content:center;}
+.ar-frame .corner{position:absolute;width:26px;height:26px;border:3px solid var(--gold-2);border-radius:4px;}
+.ar-frame .c1{left:-1px;top:-1px;border-right:0;border-bottom:0;} .ar-frame .c2{right:-1px;top:-1px;border-left:0;border-bottom:0;}
+.ar-frame .c3{left:-1px;bottom:-1px;border-right:0;border-top:0;} .ar-frame .c4{right:-1px;bottom:-1px;border-left:0;border-top:0;}
+.ar-scanline{position:absolute;left:10px;right:10px;height:2px;background:linear-gradient(90deg,transparent,#7fe3c4,transparent);
+  box-shadow:0 0 12px #7fe3c4;animation:scan 2.2s ease-in-out infinite;}
+@keyframes scan{0%{top:12px;}50%{top:150px;}100%{top:12px;}}
+.ar-fig{font-family:var(--title);font-size:40px;color:#cfeee0;opacity:.9;}
+.ar-verse{font-family:var(--title);font-size:19px;line-height:2;margin:14px auto;max-width:260px;color:#f0e6cf;min-height:40px;}
+.ar-verse .cursor{color:var(--gold-2);}
+
+/* ============ AIGC ============ */
+.tabs{display:flex;background:var(--line-2);border-radius:999px;padding:4px;gap:4px;}
+.tabs .tb{flex:1;text-align:center;padding:9px;border-radius:999px;font-size:13px;color:var(--ink-2);cursor:pointer;font-weight:600;transition:.2s;}
+.tabs .tb.on{background:#fff;color:var(--jade-2);box-shadow:var(--shadow);}
+textarea.inp{width:100%;border:1px solid var(--line);border-radius:var(--r-sm);padding:12px;font-family:var(--body);font-size:14px;resize:none;height:88px;background:var(--paper-2);color:var(--ink);}
+textarea.inp:focus{outline:0;border-color:var(--jade);}
+.poem-out{background:linear-gradient(160deg,#fff,#FBF8EF);border:1px solid var(--line);border-radius:var(--r);padding:22px 18px;margin-top:14px;text-align:center;position:relative;}
+.poem-out::before{content:"";position:absolute;inset:8px;border:1px solid var(--gold-soft);border-radius:12px;pointer-events:none;}
+.poem-out .pt{font-family:var(--title);font-size:15px;color:var(--gold);letter-spacing:3px;margin-bottom:12px;}
+.poem-out .pl{font-family:var(--title);font-size:17px;line-height:2.1;color:var(--ink);letter-spacing:2px;}
+.typing .pl span{opacity:0;animation:pop .4s forwards;}
+@keyframes pop{to{opacity:1;}}
+
+/* ============ 商城 ============ */
+.goods{background:var(--card);border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow);border:1px solid var(--line-2);}
+.goods .g-cover{height:110px;display:flex;align-items:center;justify-content:center;position:relative;font-family:var(--title);color:#fff;font-size:15px;letter-spacing:2px;}
+.goods .g-body{padding:10px 11px 12px;}
+.goods .g-name{font-size:13.5px;font-weight:600;}
+.goods .g-desc{font-size:11px;color:var(--ink-3);margin:4px 0 8px;line-height:1.5;min-height:32px;}
+.goods .g-foot{display:flex;align-items:center;justify-content:space-between;}
+.goods .price{color:var(--rose);font-weight:700;font-family:var(--title);} .goods .price small{font-size:10px;}
+.add{width:28px;height:28px;border-radius:50%;background:var(--jade);color:#fff;border:0;font-size:18px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 10px rgba(79,125,92,.4);}
+.add:active{transform:scale(.9);}
+
+/* ============ 列表单元 ============ */
+.cell{display:flex;align-items:center;gap:12px;padding:14px 4px;border-bottom:1px solid var(--line-2);cursor:pointer;}
+.cell:last-child{border:0;}
+.cell .ci{width:38px;height:38px;border-radius:12px;display:flex;align-items:center;justify-content:center;flex:none;background:var(--jade-soft);color:var(--jade-2);}
+.cell .ct{flex:1;} .cell .ct .a{font-size:14.5px;font-weight:600;} .cell .ct .b{font-size:11.5px;color:var(--ink-3);margin-top:2px;}
+.cell .cv{font-size:12.5px;color:var(--ink-3);} .cell .arr{color:var(--ink-3);}
+
+/* ============ 底部 tab ============ */
+.tabbar{position:absolute;left:0;right:0;bottom:0;height:74px;background:rgba(255,255,255,.9);backdrop-filter:blur(14px);
+  border-top:1px solid var(--line);display:flex;padding:8px 6px 22px;z-index:40;}
+.tabbar .tab{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;color:var(--ink-3);transition:.15s;}
+.tabbar .tab svg{width:24px;height:24px;}
+.tabbar .tab span{font-size:10.5px;font-weight:600;}
+.tabbar .tab.on{color:var(--jade);}
+.tabbar .tab.on .tb-home{transform:translateY(-2px);}
+.tabbar .tab .tb-home{transition:.2s;}
+
+/* ============ 详情 overlay ============ */
+.overlay{position:absolute;inset:0;background:var(--paper);z-index:60;transform:translateX(100%);transition:transform .34s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column;}
+.overlay.show{transform:none;}
+.ov-bar{flex:none;height:52px;display:flex;align-items:center;gap:8px;padding:0 14px;background:rgba(246,243,234,.9);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);}
+.ov-bar .ob-back{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;background:#fff;border:1px solid var(--line);}
+.ov-bar .ob-t{font-family:var(--title);font-size:17px;font-weight:700;}
+.ov-scroll{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;} .ov-scroll::-webkit-scrollbar{width:0;}
+.ov-body{padding:0 16px 40px;}
+.ov-hero{margin:0 -16px 0;padding:34px 20px 22px;color:#fff;position:relative;overflow:hidden;}
+.ov-hero .no{font-family:var(--title);font-size:13px;letter-spacing:4px;opacity:.85;}
+.ov-hero h2{font-family:var(--title);font-size:26px;margin:6px 0 4px;letter-spacing:3px;}
+.ov-hero .kw{font-size:13px;letter-spacing:2px;opacity:.92;}
+.ov-hero .verse{font-family:var(--title);margin-top:14px;font-size:15px;opacity:.95;border-left:2px solid rgba(255,255,255,.5);padding-left:12px;line-height:1.9;}
+.ov-hero svg.bigart{position:absolute;right:14px;bottom:10px;width:78px;height:78px;opacity:.16;}
+.link{background:linear-gradient(150deg,#FFF7E9,#FBEFD8);border:1px solid var(--gold-soft);border-radius:var(--r);padding:14px;margin-top:14px;}
+.link .lk-h{display:flex;align-items:center;gap:8px;font-family:var(--title);font-weight:700;color:#8a6a2f;font-size:15px;}
+.link .lk-i{font-size:12px;color:#8a6a2f;line-height:1.7;} .link ul{margin:8px 0 0;padding-left:18px;} .link li{font-size:12.5px;color:var(--ink-2);line-height:1.85;}
+.ov-h{font-family:var(--title);font-size:16px;font-weight:700;margin:20px 0 8px;display:flex;align-items:center;gap:8px;}
+.ov-h::before{content:"";width:4px;height:15px;border-radius:2px;background:var(--jade);}
+.li-item{display:flex;gap:10px;padding:9px 0;border-bottom:1px dashed var(--line);font-size:13px;color:var(--ink-2);line-height:1.6;}
+.li-item .lb{color:var(--gold);font-weight:700;flex:none;}
+.exp-item{display:flex;gap:8px;padding:8px 0;font-size:13px;color:var(--ink-2);line-height:1.6;}
+.exp-item::before{content:"◦";color:var(--jade);font-weight:700;}
+.ov-foot{flex:none;background:rgba(246,243,234,.94);backdrop-filter:blur(10px);border-top:1px solid var(--line);padding:12px 16px;display:flex;gap:10px;}
+
+/* ============ toast / sheet / cart ============ */
+#toast{position:absolute;left:50%;bottom:96px;transform:translateX(-50%) translateY(20px);background:rgba(43,43,39,.94);
+  color:#fff;padding:11px 20px;border-radius:999px;font-size:13px;opacity:0;pointer-events:none;transition:.28s;z-index:90;white-space:nowrap;box-shadow:var(--shadow-lg);}
+#toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+.sheet-mask{position:absolute;inset:0;background:rgba(30,30,25,.35);opacity:0;pointer-events:none;transition:.25s;z-index:70;}
+.sheet-mask.show{opacity:1;pointer-events:auto;}
+.sheet{position:absolute;left:0;right:0;bottom:0;background:var(--paper);border-radius:24px 24px 0 0;z-index:75;transform:translateY(100%);transition:transform .3s cubic-bezier(.4,0,.2,1);max-height:72%;display:flex;flex-direction:column;}
+.sheet.show{transform:none;}
+.sheet .sh-h{padding:16px 18px 8px;display:flex;align-items:center;justify-content:space-between;}
+.sheet .sh-h .s{font-family:var(--title);font-size:17px;font-weight:700;}
+.sheet .sh-b{overflow-y:auto;padding:0 18px 18px;} .sheet .sh-b::-webkit-scrollbar{width:0;}
+.cart-line{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--line-2);}
+.cart-line .cl-n{flex:1;font-size:14px;} .cart-line .cl-p{color:var(--rose);font-weight:600;font-size:14px;}
+.stepper{display:flex;align-items:center;gap:10px;} .stepper button{width:24px;height:24px;border-radius:7px;border:1px solid var(--line);background:#fff;cursor:pointer;font-size:15px;color:var(--ink);}
+.cart-bar{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;border-top:1px solid var(--line);}
+.cart-bar .tot{font-size:14px;} .cart-bar .tot b{color:var(--rose);font-family:var(--title);font-size:20px;}
+.empty{text-align:center;padding:40px 20px;color:var(--ink-3);} .empty svg{opacity:.4;margin-bottom:10px;}
+.field{margin-bottom:12px;} .field label{font-size:12.5px;color:var(--ink-2);font-weight:600;display:block;margin-bottom:6px;}
+.field input,.field select{width:100%;padding:11px 12px;border:1px solid var(--line);border-radius:var(--r-sm);font-size:14px;background:var(--paper-2);color:var(--ink);font-family:var(--body);}
+.field input:focus,.field select:focus{outline:0;border-color:var(--jade);}
+.wish{display:flex;flex-wrap:wrap;gap:8px;}
+.wish .w{background:linear-gradient(135deg,#fff,#FBF6EA);border:1px solid var(--gold-soft);border-radius:12px;padding:9px 13px;font-size:13px;color:#8a6a2f;font-family:var(--title);}
+.stat3{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;text-align:center;}
+.stat3 .st{padding:12px 4px;background:var(--paper-2);border-radius:var(--r-sm);} .stat3 .st b{display:block;font-family:var(--title);font-size:20px;color:var(--jade-2);} .stat3 .st span{font-size:11px;color:var(--ink-3);}
+.mine-hero{background:linear-gradient(140deg,#3F6650,#4E828A);border-radius:var(--r-lg);padding:20px;color:#fff;display:flex;align-items:center;gap:14px;margin-top:8px;box-shadow:var(--shadow);}
+.mine-hero .av{width:56px;height:56px;border-radius:50%;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-family:var(--title);font-size:24px;border:2px solid rgba(255,255,255,.5);}
+.mine-hero .mi .n{font-family:var(--title);font-size:19px;letter-spacing:1px;} .mine-hero .mi .l{font-size:12px;opacity:.85;margin-top:3px;}
+.note{font-size:11px;color:var(--ink-3);line-height:1.7;padding:12px 14px;background:var(--paper-2);border-radius:var(--r-sm);border:1px dashed var(--line);margin-top:16px;}
+.note b{color:var(--jade-2);}
+</style>
+</head>
+<body>
+<div class="stage">
+  <div class="phone"><div class="phone-inner">
+    <!-- 状态栏 -->
+    <div class="statusbar">
+      <span id="clock">9:41</span>
+      <span class="sicons">
+        <svg width="17" height="11" viewBox="0 0 17 11"><g fill="currentColor"><rect x="0" y="7" width="3" height="4" rx="1"/><rect x="4.5" y="5" width="3" height="6" rx="1"/><rect x="9" y="2.5" width="3" height="8.5" rx="1"/><rect x="13.5" y="0" width="3" height="11" rx="1" opacity=".35"/></g></svg>
+        <svg width="16" height="12" viewBox="0 0 16 12" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M8 10.5l.01 0M2 6.2a8.5 8.5 0 0112 0M4.5 8.4a5 5 0 017 0" stroke-linecap="round"/></svg>
+        <svg width="26" height="12" viewBox="0 0 26 12"><rect x="1" y="1" width="21" height="10" rx="2.6" fill="none" stroke="currentColor" opacity=".5"/><rect x="3" y="3" width="16" height="6" rx="1.4" fill="currentColor"/><rect x="23.5" y="4" width="1.8" height="4" rx="1" fill="currentColor" opacity=".5"/></svg>
+      </span>
+    </div>
+    <!-- 顶部导航 -->
+    <div class="appbar">
+      <button class="ab-back" id="abBack" onclick="goBack()">‹</button>
+      <span class="ab-title" id="abTitle">八诗八景</span>
+      <span class="capsule">
+        <span class="cp" onclick="toast('··· 小程序菜单（演示）')">•••</span>
+        <span class="cp" onclick="toast('✕ 关闭（演示环境保留）')"></span>
+      </span>
+    </div>
+    <!-- 页面容器 -->
+    <div class="scroll" id="scroll">
+      <div class="page active" id="pg-home"></div>
+      <div class="page" id="pg-map"></div>
+      <div class="page" id="pg-ar"></div>
+      <div class="page" id="pg-aigc"></div>
+      <div class="page" id="pg-stamp"></div>
+      <div class="page" id="pg-cloud"></div>
+      <div class="page" id="pg-book"></div>
+      <div class="page" id="pg-mall"></div>
+      <div class="page" id="pg-mine"></div>
+      <div class="page" id="pg-svc"></div>
+      <div class="page" id="pg-cal"></div>
+    </div>
+    <!-- 底部 Tab -->
+    <div class="tabbar" id="tabbar">
+      <div class="tab on" data-tab="home" onclick="go('home')"><span class="tb-home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 11l8-6 8 6v8a1 1 0 01-1 1h-4v-6H9v6H5a1 1 0 01-1-1z" stroke-linejoin="round"/></svg></span><span>首页</span></div>
+      <div class="tab" data-tab="map" onclick="go('map')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 4L4 6v14l5-2 6 2 5-2V4l-5 2-6-2z" stroke-linejoin="round"/><path d="M9 4v14M15 6v14" /></svg><span>导览</span></div>
+      <div class="tab" data-tab="stamp" onclick="go('stamp')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M9 12l2 2 4-4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>集章</span></div>
+      <div class="tab" data-tab="mall" onclick="go('mall')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 8h12l-1 11a1 1 0 01-1 1H8a1 1 0 01-1-1z"/><path d="M9 8a3 3 0 016 0" stroke-linecap="round"/></svg><span>商城</span></div>
+      <div class="tab" data-tab="mine" onclick="go('mine')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c0-3.5 3-6 7-6s7 2.5 7 6" stroke-linecap="round"/></svg><span>我的</span></div>
+    </div>
+
+    <!-- 详情 overlay -->
+    <div class="overlay" id="overlay">
+      <div class="ov-bar"><div class="ob-back" onclick="closeOverlay()">‹</div><div class="ob-t" id="ovTitle">展区</div></div>
+      <div class="ov-scroll" id="ovScroll"></div>
+      <div class="ov-foot" id="ovFoot" style="display:none"></div>
+    </div>
+
+    <!-- sheet + mask -->
+    <div class="sheet-mask" id="mask" onclick="closeSheet()"></div>
+    <div class="sheet" id="sheet"><div class="sh-h"><span class="s" id="sheetTitle">标题</span><span style="cursor:pointer;font-size:20px;color:var(--ink-3)" onclick="closeSheet()">✕</span></div><div class="sh-b" id="sheetBody"></div></div>
+
+    <div id="toast"></div>
+  </div></div>
+</div>
+
+<script>
+/* ============================================================
+   数据层（不依赖外部数据，全部内置，仅供功能展示）
+   ============================================================ */
+const ZONES = [
+ {id:'z1',no:'壹',art:'bridge',color:'#4F7D5C',name:'万善桥',village:'舍北村',kw:'登台·立志',
+  verse:'望秋月，秋月光如练',poem:'登台',stage:'入诗',tag:'国保古桥',
+  intent:'沈约登台望月，望的不是月，是一个人站在高处时打开的眼界与胸襟。登台是八咏第一首，也是游线第一步。踏上万善桥，就是"入诗"的开始。',
+  scenes:['登台石 · 桥头天然青石刻"登台"二字，踏石即入诗','望秋台 · 桥身最高处木质平台，远眺稻田远山，旁立诗牌','诗路折页领取处 · 竹制小架放"八咏诗路"折页'],
+  exps:['踏登台石，默念一句自己的"志"','登望秋台远眺，看完整诗路走向','取折页，正式入诗'],
+  link:['AR扫码可唤起虚拟沈约诵读"望秋月，秋月光如练"，引导进入诗境','夜间月光投影营造"月光如练"氛围','桥头设沈约雕塑与登台石，作为八景游线起点'],guide:'沈约登台望月，你登台立志。桥是起点，也是你在这条诗路上的第一次抬头。'},
+ {id:'z2',no:'贰',art:'scholar',color:'#4E828A',name:'德清院院士馆',village:'舍北村',kw:'怀人·仰贤',
+  verse:'故人不可见，山东空复情',poem:'怀人',stage:'仰贤',tag:'乡贤文脉',
+  intent:'沈约《怀人》写对故友贤者的追思，此处转化为对历代乡贤、现代院士的敬仰。',
+  scenes:['崇学堂 · 讲学、家风家训传承','怀人廊 · 木构长廊，挂历代乡贤名士木牌，可系祈福带','祈福墙 · 廊尾数字祈福屏'],
+  exps:['扫码阅览乡贤事迹，了解舍北文脉','在怀人廊系祈福带，寄托敬意','参加"读家训、写家书"主题研学'],
+  link:['廊尾数字祈福屏：扫码通过小程序输入名字或祝福，投影至祈福墙','AIGC"写家书"：生成古风家训，可打印或保存至数字云展平台','乡贤故事音频同步至小程序，可随时收听','整体参观完成后盖第二枚"怀人·仰贤"章'],guide:'怀人仰贤，一脉相承。'},
+ {id:'z3',no:'叁',art:'bamboo',color:'#5C7A5E',name:'沈约纪念馆·纪念碑·公园',village:'舍北村',kw:'咏竹·明志',
+  verse:'解佩去朝市，被守山中阿',poem:'咏竹',stage:'明志',tag:'咏竹明志',
+  intent:'馆为"心"，竹为"骨"。三节点一线：知竹→成竹→行竹，一个动作就是"学沈约"。',
+  scenes:['沈约纪念馆 · 触竹·知其人，弧形竹简墙刻八咏全诗','沈约纪念碑 · 成竹·立其志，静思台刻"虚心、有节、凌云"','竹心堂 · 行竹·践其节，竹径漫步、竹影茶席'],
+  exps:['读八咏，选一句心念诗','碑前静立、默思、献花，完成"成竹"仪式','走竹径、做竹器、竹影茶席'],
+  link:['静思台旁设AR互动卡牌扫码点：虚拟沈约立于碑前，诵读"解佩去朝市，被守山中阿"','竹心堂旁设AIGC互动屏：输入感悟，自行创作或AI生成当代诗篇，完成"咏竹明志"共创','整体参观完成后盖第三枚"咏竹·明志"章'],guide:'沈约咏竹，竹为气节象征。'},
+ {id:'z4',no:'肆',art:'wind',color:'#4E828A',name:'听风草坪（笼式足球场）',village:'舍北村',kw:'听风·逐风',
+  verse:'春风本自奇，杨柳最相宜',poem:'听风',stage:'逐风',tag:'风动少年',
+  intent:'沈约《听风》写风声过耳、心随境转。少年奔跑带起的风，正是诗中"风"的当代回响。',
+  scenes:['低矮立式小诗牌 · 带"风"短句，配人体感应语音装置','风架薄纱诗笺 · 纱面印诗词名句，风吹纱动'],
+  exps:['放风筝、玩风车','草坪奔跑、野餐','走近诗牌，触发诗句朗读'],
+  link:['AR互动卡牌扫码后：虚拟沈约风中剪影诵读"春风本自奇，杨柳最相宜"','盖第四枚"听风·逐风"章'],guide:'会圃临春风，听风逐风。'},
+ {id:'z5',no:'伍',art:'moon',color:'#7C89A6',name:'十二生肖桥',village:'十二生肖桥',kw:'对月·咏怀',
+  verse:'夕行闻夜鹤，月下独徘徊',poem:'对月',stage:'咏怀',tag:'月下咏怀',
+  intent:'沈约《对月》写月下独酌、对影成三。桥横水上，月映桥洞，天然是"对月"之地。',
+  scenes:['待月亭 · 桥头设亭，农历十五前后办"桥上对月诗会"','生肖灯 · 桥栏十二生肖石雕旁设灯，夜间与月争辉'],
+  exps:['月下走桥数生肖','亭中赏月、对月吟诗','夜游"月光夜市"'],
+  link:['AR扫码可唤起虚拟月亮与虚拟沈约月下独行','桥洞投影月映水面，生肖灯与宋韵灯笼倒映水中','承接"听风逐风"的奔放，转入"对月咏怀"的静思，为"感雪归乡"铺垫','盖第五枚"对月·咏怀"章'],guide:'月映桥洞，对影成三。'},
+ {id:'z6',no:'陆',art:'rice',color:'#B98B3E',name:'下舍稻田·望秋田',village:'沈家角',kw:'望秋·知序',
+  verse:'飘落逐风尽，方知岁早寒',poem:'望秋',stage:'知序',tag:'稻作时序',
+  intent:'《岁暮愍衰草》写秋野苍茫、草木知序。看稻浪从青到黄、从收到藏，比人造景观更贴近诗的本意。',
+  scenes:['望秋径 · 沿田埂走一段，路边立诗牌','知序亭 · 田边竹木亭挑出，刻"飘落逐风尽，方知岁早寒"','三候田 · 早中晚稻分种，可见青、黄、金三色','田园小火车 · 旺季环稻田观光'],
+  exps:['秋收时下田割稻、拾穗','认养一块田，亲手收割','登知序亭观稻浪'],
+  link:['AR扫码观看稻田四季动画','从"咏竹明志"转入"望秋知序"，从精神走向土地，为"临水照心"过渡','盖第六枚"望秋·知序"章'],guide:'飘落逐风尽，方知岁早寒。'},
+ {id:'z7',no:'柒',art:'scarf',color:'#9A6F57',name:'舍东村·围巾馆',village:'舍东村',kw:'临水·照心',
+  verse:'霜落庭中树，叶下洞庭初',poem:'临水',stage:'照心',tag:'手艺照心',
+  intent:'沈约《临水》写临流照影、澄怀观道。舍东村以"围巾"为另一重"水"——柔软、流动、可塑，承载百姓营生与记忆。',
+  scenes:['围巾百年展 · 老照片、旧织机、历代产品，呈现从手工织造到跨境电商','照心坊 · 二层织机、染缸、纺线工具，可亲手织一段围巾','织一首诗互动墙 · 白坯围巾浸染或手绘诗句，带走专属"诗巾"'],
+  exps:['读懂"一村一品"转型故事','亲手织一段围巾、体验植物染','在"织一首诗"墙留下诗巾'],
+  link:['AR扫码后虚拟沈约诵读诗句，试戴诗巾','线上小程序可定制诗巾、下单村礼市集产品','以"围巾是另一种水"为意象，收束情感','盖第七枚"临水·照心"章'],guide:'沈约临水照心，你在围巾里照见乡土。'},
+ {id:'z8',no:'捌',art:'snow',color:'#6E7A93',name:'文化礼堂',village:'舍北村',kw:'感雪·归乡',
+  verse:'雪落无声，万物归宁',poem:'感雪',stage:'归乡',tag:'归乡终点',
+  intent:'沈约《感雪》写雪落无声、万物归宁。雪是收敛、回归、年终的安宁。游线终点即"归乡"——从诗出发，回到文化的根与精神的乡。',
+  scenes:['归乡广场 · 礼堂前广场，冬季人工造雪，打造"舍北初雪"','沈约诗路全景沙盘 · 礼堂内回顾全程，写下自己的"八咏"感悟'],
+  exps:['回顾八景全程，书写八咏感悟','冬季体验"舍北初雪"','参加年猪饭、冬至圆子等冬季民俗'],
+  link:['八大展区以《八咏诗》为叙事主线，前三个重点打造"入诗—仰贤—明志"的仪式感与数字交互','盖第八枚"感雪·归乡"章，集满八章兑换文创小礼'],guide:'雪落无声，万物归宁。归乡即安。'}
+];
+
+const GOODS=[
+ {id:'g1',name:'竹编礼盒套装',price:59.9,cat:'大众消费',desc:'竹质礼盒，装下诗意江南，伴手礼佳选。',c1:'#5C7A5E',c2:'#47624A'},
+ {id:'g2',name:'青瓷茶具套装',price:49.9,cat:'大众消费',desc:'青瓷茶壶配茶杯，温润如玉，宋韵雅致。',c1:'#4E828A',c2:'#2F514B'},
+ {id:'g3',name:'丝绸方巾',price:39.9,cat:'大众消费',desc:'江南丝绸方巾，山水晕染，轻拢诗意。',c1:'#9A6F57',c2:'#7A563F'},
+ {id:'g4',name:'金属徽章吧唧',price:9.9,cat:'大众消费',desc:'金属徽章，别一枚诗心，点缀日常。',c1:'#B98B3E',c2:'#9C7B46'},
+ {id:'g5',name:'国风钥匙扣',price:12.9,cat:'大众消费',desc:'钥匙扣一枚，小诗随身，相随相伴。',c1:'#7C89A6',c2:'#566184'},
+ {id:'g6',name:'明信片套装',price:9.9,cat:'大众消费',desc:'写一段诗情，寄往远方。',c1:'#4F7D5C',c2:'#3F6650'},
+ {id:'g7',name:'木质杯垫',price:22.9,cat:'大众消费',desc:'刻一枚诗眼，落一杯清欢。',c1:'#8a6a4a',c2:'#6b5130'},
+ {id:'g8',name:'国风手机壳',price:12.9,cat:'大众消费',desc:'诗意随行，见字如面。',c1:'#4E828A',c2:'#3E665F'},
+ {id:'g9',name:'诗词笔记本',price:9.9,cat:'研学伴手礼',desc:'记录诗路，写下心迹。',c1:'#B98B3E',c2:'#8a6a2f'},
+ {id:'g10',name:'硬笔练字本',price:12.9,cat:'研学伴手礼',desc:'描沈约诗句，练一手好字。',c1:'#5C7A5E',c2:'#47624A'},
+ {id:'g11',name:'八咏识字卡',price:15.9,cat:'研学伴手礼',desc:'一诗一字，边玩边学。',c1:'#7C89A6',c2:'#566184'},
+ {id:'g12',name:'纸质书签',price:12.9,cat:'研学伴手礼',desc:'夹住诗行，留住时光。',c1:'#9A6F57',c2:'#7A563F'},
+ {id:'g13',name:'国风套尺',price:8.9,cat:'研学伴手礼',desc:'量一量诗的路，画一画景的形。',c1:'#4E828A',c2:'#2F514B'},
+ {id:'g14',name:'诗词印章',price:19.9,cat:'研学伴手礼',desc:'盖下八咏，收藏一段行程。',c1:'#B45B54',c2:'#96453E'},
+ {id:'g15',name:'手账贴纸',price:7.9,cat:'研学伴手礼',desc:'八景八诗，贴满诗路记忆。',c1:'#B98B3E',c2:'#9C7B46'},
+ {id:'g16',name:'研学档案袋',price:16.9,cat:'研学伴手礼',desc:'收纳全程作业，留下成长印记。',c1:'#4F7D5C',c2:'#3F6650'}
+];
+
+const ART={
+ bridge:'<path d="M4 9c2-2 4-2 6 0s4 2 6 0 3-1.5 4 0" stroke-linecap="round"/><path d="M4 14c2-2 4-2 6 0s4 2 6 0 3-1.5 4 0" stroke-linecap="round" opacity=".55"/><path d="M7 9v6M17 9v6" stroke-linecap="round"/>',
+ scholar:'<path d="M4 9l8-4 8 4-8 4z"/><path d="M8 11v5c3 2 5 2 8 0v-5"/><path d="M20 9v6" stroke-linecap="round"/>',
+ bamboo:'<path d="M12 3v16M12 9l-4-2M12 14l4-2M12 11l-3 1M12 16l3 1" stroke-linecap="round"/>',
+ rice:'<path d="M12 4c0 3 3 4 3 8 0 2.5-1.5 4-3 4s-3-1.5-3-4c0-4 3-5 3-8" stroke-linecap="round"/><path d="M9 12h6" stroke-linecap="round" opacity=".6"/>',
+ scarf:'<path d="M6 8h12v4a6 6 0 0 1-6 6 6 6 0 0 1-6-6z"/><path d="M6 10H4M20 10h-2" stroke-linecap="round" opacity=".6"/>',
+ wind:'<path d="M3 8c2-1.5 4-1.5 6 0s4 1.5 6 0 3-1.5 4-.5" stroke-linecap="round"/><path d="M3 13c2-1.5 4-1.5 6 0s4 1.5 6 0 3-1.5 4-.5" stroke-linecap="round" opacity=".6"/><path d="M3 18c2-1.5 4-1.5 6 0s4 1.5 6 0 3-1.5 4-.5" stroke-linecap="round" opacity=".35"/>',
+ moon:'<path d="M20 14a8 8 0 1 1-9-9 6.5 6.5 0 0 0 9 9z"/><circle cx="15" cy="9" r="1"/><circle cx="18" cy="12" r=".8"/>',
+ snow:'<circle cx="12" cy="10" r="4"/><path d="M12 6V4M12 16v-2M6 10H4M20 10h-2M8.5 7l-1.4-1.4M15.5 13l1.4 1.4M15.5 7l1.4-1.4M8.5 13l-1.4 1.4" stroke-linecap="round"/>'
+};
+function art(art,color,size){color=color||'currentColor';
+ return '<svg viewBox="0 0 24 24" fill="none" stroke="'+color+'" stroke-width="1.6" style="width:'+(size||24)+'px;height:'+(size||24)+'px">'+ART[art]+'</svg>';}
+function artFill(art,color){return '<svg viewBox="0 0 24 24" fill="'+(color||'currentColor')+'" stroke="none">'+ART[art]+'</svg>';}
+
+/* ---- 内置内容数据 ---- */
+const ROUTES=[
+ {name:'半日 · 入诗线',dur:'约3小时',nodes:[0,1,2],desc:'万善桥→院士馆→沈约纪念馆·碑·公园，深度体验"入诗—仰贤—明志"。'},
+ {name:'一日 · 八咏全程',dur:'约8小时',nodes:[0,1,2,3,4,5,6,7],desc:'循《八咏诗》顺序走遍八大展区，集满八枚印章。'},
+ {name:'两日 · 深度研学',dur:'2天1晚',nodes:[0,1,2,5,6,7],desc:'重点展区+稻田+围巾馆手作+礼堂夜话，含课程与住宿。'},
+ {name:'主题 · 亲子诗教',dur:'约4小时',nodes:[0,3,4,5],desc:'登台立志、听风对月、望秋知序，边玩边诵，寓教于游。'},
+ {name:'主题 · 家风家训',dur:'约3小时',nodes:[1,2,6],desc:'写家书、明竹志、织诗巾，感悟舍北文脉与手艺传承。'}
+];
+const COURSES=[
+ {name:'半日诗路导学',price:68,dur:'半天',n:'8课时/团',nodes:'万善桥·院士馆',desc:'讲解员带队入诗，含折页+首章体验。'},
+ {name:'一日八咏研学营',price:158,dur:'全天',n:'含午餐',nodes:'八大展区',desc:'八景全游+竹心堂诗会+集章兑换文创礼。'},
+ {name:'家风家训课',price:98,dur:'半天',n:'亲子1大1小',nodes:'院士馆·竹心堂',desc:'读家训、AIGC写家书、打印家训卡带走。'},
+ {name:'织一首诗 · 围巾手作',price:128,dur:'2小时',n:'含材料包',nodes:'舍东围巾馆',desc:'植物染+手绘诗巾，带走专属作品。'},
+ {name:'稻田四季课堂',price:88,dur:'半天',n:'秋收季',nodes:'下舍稻田',desc:'认养一块田，观稻浪，识时序。'},
+ {name:'月下对诗会',price:78,dur:'夜场',n:'农历十五前后',nodes:'十二生肖桥',desc:'点生肖灯、对月吟诗、逛月光夜市。'}
+];
+const SERVICES=[
+ {i:'🏛️',a:'游客中心',b:'咨询·寄存·母婴·无障碍',c:'8:30–20:00'},
+ {i:'🛖',a:'诗路驿站',b:'休憩·饮水·手机充电·诗书角',c:'全时段'},
+ {i:'🍵',a:'流动茶摊',b:'竹心堂·望秋亭沿线，四季时饮',c:'9:00–17:30'},
+ {i:'🍚',a:'归乡食堂',b:'舍北家宴·年猪饭·冬至圆子',c:'午/晚餐'},
+ {i:'🚻',a:'生态厕所',b:'八展区各1处·第三卫生间',c:'全时段'},
+ {i:'🚲',a:'共享单车 / 电瓶车',b:'扫码骑行串联诗路',c:'6:00–22:00'},
+ {i:'🚌',a:'观光小巴站点',b:'田园小火车 · 诗路环线',c:'旺季整点发车'},
+ {i:'🧾',a:'四季市集时间表',b:'春诗市/夏夜集/秋农集/冬年集',c:'详见活动日历'}
+];
+const EVENTS=[
+ {s:'spring',n:'沈约崇学 · 春季诗市',d:'3–4月',p:'竹心堂 / 万善桥',t:'开耕诗会 · 家训宣讲 · 竹器手作'},
+ {s:'summer',n:'水韵新安 · 夏季夜集',d:'6–8月',p:'十二生肖桥 / 舍北溪',t:'纳凉市集 · 手作夜摊 · 光影水幕'},
+ {s:'autumn',n:'丰收望秋 · 秋季农集',d:'9–11月',p:'下舍稻田 / 望秋田',t:'开镰仪式 · 稻田课堂 · 稻草工坊'},
+ {s:'winter',n:'感雪归乡 · 冬季年集',d:'12–2月',p:'文化礼堂 / 归乡广场',t:'舍北初雪 · 年猪饭 · 写八咏'},
+ {s:'moon',n:'月光夜市',d:'夏季每周六',p:'十二生肖桥',t:'点生肖灯 · 逛夜市 · 对月吟诗'},
+ {s:'gold',n:'八咏诗会',d:'每月十五',p:'竹心堂',t:'同题共咏 · AIGC共创 · 年度诗展'}
+];
+const EVBG={spring:'sc-spring',summer:'sc-summer',autumn:'sc-autumn',winter:'sc-winter',moon:'linear-gradient(150deg,#7C89A6,#566184)',gold:'linear-gradient(150deg,#CBA25C,#9C7B46)'};
+
+/* ============================================================
+   应用状态
+   ============================================================ */
+const state={stamps:{},orders:[],bookings:[],poems:[],blessings:[],cart:{},
+  points:120,vip:'诗路·雅集会员',checkins:{}};
+try{const s=localStorage.getItem('bsbj_mini');/* no persistence needed */}catch(e){}
+function stampedCount(){return Object.values(state.stamps).filter(Boolean).length;}
+
+/* ============================================================
+   路由
+   ============================================================ */
+const PAGES={home:'八诗八景',map:'线路导览',ar:'AR 互动',aigc:'AIGC 共创',stamp:'集章打卡',
+  cloud:'云展馆',book:'研学预约',mall:'文创商城',mine:'个人中心',svc:'服务设施',cal:'活动日历'};
+const TABBED={home:1,map:1,stamp:1,mall:1,mine:1};
+let history=[],current='home';
+const renderers={};
+function go(id,push){
+  if(id===current && push!==true){/* re-render */}
+  if(push!==false && id!==current) history.push(current);
+  current=id;
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  const el=document.getElementById('pg-'+id); el.innerHTML=renderers[id](); el.classList.add('active');
+  document.getElementById('scroll').scrollTop=0;
+  document.getElementById('abTitle').textContent=(id==='home')?'八诗八景':PAGES[id];
+  document.getElementById('abBack').classList.toggle('show',!TABBED[id]);
+  document.getElementById('tabbar').style.display=TABBED[id]?'flex':'none';
+  document.querySelectorAll('.tabbar .tab').forEach(t=>t.classList.toggle('on',t.dataset.tab===id));
+}
+function goBack(){ if(history.length){go(history.pop(),false);} else go('home',false); closeOverlay(); }
+function after(fn){/* helper to re-render current + home/mine */ fn&&fn(); const c=current; go(c,false); }
+
+/* ============================================================
+   Toast / Sheet
+   ============================================================ */
+let tt;
+function toast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');clearTimeout(tt);tt=setTimeout(()=>t.classList.remove('show'),1900);}
+function openSheet(title,html){document.getElementById('sheetTitle').textContent=title;document.getElementById('sheetBody').innerHTML=html;
+  document.getElementById('sheet').classList.add('show');document.getElementById('mask').classList.add('show');}
+function closeSheet(){document.getElementById('sheet').classList.remove('show');document.getElementById('mask').classList.remove('show');}
+
+/* ============================================================
+   渲染：首页
+   ============================================================ */
+function homeProgress(){const n=stampedCount();
+ let seals='';ZONES.forEach(z=>{seals+='<div class="s '+(state.stamps[z.id]?'done':'')+'">'+(state.stamps[z.id]?z.kw.split('·')[0]:z.no)+'</div>';});
+ return '<div class="prog"><div class="pr-top"><span class="lbl">我的集章进度</span>'+
+  '<span class="num">已集 <b>'+n+'</b> / 8 枚</span></div>'+
+  '<div class="bar"><i style="width:'+(n/8*100)+'%"></i></div>'+
+  '<div style="font-size:12px;color:var(--ink-3)">'+(n===8?'🎉 八章集满！可至游客中心兑换文创小礼':'集满八章，兑换专属文创小礼')+'</div>'+
+  '<div class="seals">'+seals+'</div>'+
+  '<button class="btn btn-gold btn-block" style="margin-top:14px" onclick="go(\'stamp\')">'+(n===8?'去查看集章成就':'开始集章打卡')+'</button></div>';
+}
+renderers.home=function(){
+ let quick='<div class="quick">'+
+  '<div class="q" onclick="go(\'map\')"><div class="qi a">'+art('bridge','#4F7D5C',24)+'</div><span>路线导览</span></div>'+
+  '<div class="q" onclick="go(\'ar\')"><div class="qi b"><svg viewBox="0 0 24 24" fill="none" stroke="#4E828A" stroke-width="1.7" style="width:24px;height:24px"><path d="M4 8V5a1 1 0 011-1h3M20 8V5a1 1 0 00-1-1h-3M4 16v3a1 1 0 001 1h3M20 16v3a1 1 0 01-1 1h-3"/><rect x="8" y="8" width="8" height="8" rx="1.5"/></svg></div><span>AR互动</span></div>'+
+  '<div class="q" onclick="go(\'aigc\')"><div class="qi c"><svg viewBox="0 0 24 24" fill="none" stroke="#8a6a2f" stroke-width="1.7" style="width:24px;height:24px"><path d="M12 3l1.8 4.7L18.5 9l-4.7 1.8L12 15l-1.8-4.2L5.5 9l4.7-1.3z"/><path d="M18 15l.9 2.1L21 18l-2.1.9L18 21l-.9-2.1L15 18l2.1-.9z"/></svg></div><span>AIGC共创</span></div>'+
+  '<div class="q" onclick="go(\'book\')"><div class="qi d"><svg viewBox="0 0 24 24" fill="none" stroke="#566184" stroke-width="1.7" style="width:24px;height:24px"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 9h16M8 3v4M16 3v4" stroke-linecap="round"/><path d="M9 14l2 2 4-4" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span>研学预约</span></div>'+
+  '<div class="q" onclick="go(\'mall\')"><div class="qi e">'+art('bamboo','#B45B54',24)+'</div><span>文创商城</span></div>'+
+  '</div>';
+ let season='';EVENTS.slice(0,4).forEach(e=>{const parts=e.n.split(' · ');season+='<div class="scard '+EVBG[e.s]+'" onclick="go(\'cal\')"><div class="sc-bg">'+parts[0].slice(-2)+'</div><div class="sc-body"><div class="n">'+parts[1]+'</div><div class="d">'+parts[0]+' · '+e.d+'</div></div></div>';});
+ let more='<div class="grid2">'+
+   miniCard('🏛️ 云展馆','八景图文·语音·诗境动画', 'cloud')+
+   miniCard('📅 活动日历','四季市集 · 月光夜市', 'cal')+
+   miniCard('🧭 服务设施','驿站·茶摊·小巴·市集', 'svc')+
+   miniCard('🎫 研学预约','半日/一日/两日课程', 'book')+
+ '</div>';
+ return ''+
+ '<div class="hero">'+
+   '<div class="h-kicker">沈约的诗词世界</div>'+
+   '<h1>八诗八景</h1>'+
+   '<div class="h-sub">扫码即入 · 线下体验 · 线上留存 · 可玩可创</div>'+
+   '<div class="h-verse">登台望月，怀人仰贤，咏竹明志<br>听风逐风，对月咏怀，望秋知序<br>临水照心，感雪归乡</div>'+
+ '</div>'+
+ quick+
+ '<div class="sec"><div class="sec-h"><span class="t">集章进度<small>POEM SEAL</small></span><span class="more" onclick="go(\'stamp\')">去集章 ›</span></div>'+homeProgress()+'</div>'+
+ '<div class="sec"><div class="sec-h"><span class="t">四季活动<small>SEASONS</small></span><span class="more" onclick="go(\'cal\')">全部 ›</span></div><div class="season">'+season+'</div></div>'+
+ '<div class="sec"><div class="sec-h"><span class="t">更多服务<small>MORE</small></span></div>'+more+'</div>'+
+ syncNote();
+}
+function miniCard(t,d,pg){return '<div class="card pad" style="cursor:pointer" onclick="go(\''+pg+'\')"><div style="font-family:var(--title);font-size:15px;font-weight:700">'+t+'</div><div style="font-size:11.5px;color:var(--ink-3);margin-top:6px;line-height:1.5">'+d+'</div></div>';}
+function syncNote(){return '<div class="note">本小程序是 <b>数字云展平台与线下展陈的统一联动入口</b>：所有 <b>AR互动、AIGC共创、数字集章</b> 数据均同步至"八诗八景"数字云展平台，<b>线下体验、线上留存、扫码即入</b>。优秀作品可纳入年度诗展。</div>';}
+
+/* ============================================================
+   渲染：线路导览（手绘地图）
+   ============================================================ */
+let curRoute=0;
+const MAPPOS=[[58,132],[126,86],[196,120],[262,74],[300,150],[240,214],[150,232],[74,196]];
+renderers.map=function(){
+ const r=ROUTES[curRoute];
+ let path='M'+r.nodes.map(i=>MAPPOS[i].join(',')).join(' L');
+ let nodes='';ZONES.forEach((z,i)=>{const on=r.nodes.includes(i);const idx=r.nodes.indexOf(i);
+   nodes+='<g class="node '+(on?'active':'')+'" onclick="openZone(\''+z.id+'\')">'+
+     '<circle cx="'+MAPPOS[i][0]+'" cy="'+MAPPOS[i][1]+'" r="'+(on?20:15)+'" fill="'+(on?z.color:'#FFFFFF')+'" stroke="'+z.color+'" stroke-width="'+(on?0:1.6)+'" opacity="'+(on?1:.8)+'"/>'+
+     (on?'<text x="'+MAPPOS[i][0]+'" y="'+(MAPPOS[i][1]+6)+'" text-anchor="middle" fill="#fff" font-size="15" font-weight="700">'+(idx+1)+'</text>'
+        :'<text x="'+MAPPOS[i][0]+'" y="'+(MAPPOS[i][1]+5)+'" text-anchor="middle" fill="'+z.color+'" font-size="12" font-weight="700">'+z.no+'</text>')+
+     '<text x="'+MAPPOS[i][0]+'" y="'+(MAPPOS[i][1]+(on?36:30))+'" text-anchor="middle" fill="#5C5B52" font-size="11">'+z.name.replace('（笼式足球场）','').replace('沈约纪念馆·纪念碑·公园','沈约纪念园').replace('下舍稻田·望秋田','望秋田').replace('德清院院士馆','院士馆')+'</text></g>';
+ });
+ let routeLines='<div class="route-info">'+r.nodes.map((i,k)=>{const z=ZONES[i];return '<div class="rt-line"><div class="rk" style="background:'+z.color+'">'+(k+1)+'</div><div class="rt"><b>'+z.name+'</b> · '+z.kw+'<br><span style="color:var(--ink-3)">'+z.stage+' — '+z.verse+'</span></div></div>';}).join('')+'</div>';
+ let chips=ROUTES.map((rt,i)=>'<div class="chip '+(i===curRoute?'on':'')+'" onclick="curRoute='+i+';go(\'map\',true)">'+rt.name+'</div>').join('');
+ return '<div style="height:8px"></div>'+
+ '<div class="hscroll" style="margin-top:8px">'+chips+'</div>'+
+ '<div class="map-wrap" style="margin-top:12px"><svg viewBox="0 0 360 300">'+
+   '<rect x="0" y="0" width="360" height="300" fill="none"/>'+
+   '<path d="M'+MAPPOS.map(p=>p.join(',')).join(' L')+'" fill="none" stroke="#DCD6C2" stroke-width="2" stroke-dasharray="3 5" stroke-linecap="round"/>'+
+   '<path d="'+path+'" fill="none" stroke="#4F7D5C" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" opacity=".85"/>'+
+   nodes+'</svg></div>'+
+ '<div class="card pad" style="margin-top:14px;display:flex;align-items:center;justify-content:space-between">'+
+   '<div><div style="font-family:var(--title);font-weight:700;font-size:16px">'+r.name+'</div><div style="font-size:12px;color:var(--ink-3);margin-top:4px">'+r.desc+'</div></div>'+
+ '</div>'+
+ '<div class="sec-h" style="margin-top:18px"><span class="t">游线节点<small>ROUTE</small></span></div>'+routeLines+
+ '<div class="grid2" style="margin-top:16px">'+
+   '<button class="btn btn-p" onclick="gps()">📍 GPS 定位</button>'+
+   '<button class="btn btn-g" onclick="manualCheck()">✋ 手动打卡</button>'+
+ '</div>'+
+ '<div class="sec"><div class="sec-h"><span class="t">八大展区<small>8 SCENES</small></span></div>'+
+   '<div class="grid2">'+ZONES.map(zcard).join('')+'</div></div>';
+}
+function zcard(z){const st=state.stamps[z.id];
+ return '<div class="zcard" onclick="openZone(\''+z.id+'\')"><div class="zc-top" style="background:linear-gradient(150deg,'+z.color+',#00000022)">'+
+ '<span class="zc-no">'+z.no+' · '+z.stage+'</span>'+art(z.art,'#ffffff',44)+'</div>'+
+ '<div class="zc-body"><div class="n">'+z.name.replace('（笼式足球场）','')+'</div>'+
+ '<div class="k">'+z.kw+' '+(st?'<span style="color:var(--rose)">✓已集</span>':'')+'</div>'+
+ '<div class="v">'+z.verse+'</div></div></div>';
+}
+function gps(){const idx=Math.min(stampedCount(),7);const z=ZONES[idx];toast('📍 定位成功 · 已进入「'+z.name+'」');}
+function manualCheck(){const z=ZONES.find(x=>!state.stamps[x.id])||ZONES[7];toast('✋ 已在「'+z.name+'」手动打卡');}
+
+/* ============================================================
+   渲染：AR 互动
+   ============================================================ */
+let arIdx=0,arTimer=null;
+renderers.ar=function(){
+ let list=ZONES.map((z,i)=>'<div class="cell" onclick="playAR('+i+')"><div class="ci" style="background:'+z.color+'22;color:'+z.color+'">'+art(z.art,z.color,22)+'</div>'+
+   '<div class="ct"><div class="a">'+z.name.replace('（笼式足球场）','')+' · '+z.kw+'</div><div class="b">AR 唤起虚拟沈约 · '+z.verse+'</div></div><div class="arr">▶</div></div>').join('');
+ const z=ZONES[arIdx];
+ return '<div class="ar-scan" id="arScan"><div class="ar-frame"><div class="corner c1"></div><div class="corner c2"></div><div class="corner c3"></div><div class="corner c4"></div>'+
+   '<div class="ar-scanline" id="arLine"></div><div class="ar-fig" id="arFig">'+z.no+'</div></div>'+
+   '<div style="font-size:12px;opacity:.8;letter-spacing:2px" id="arTip">对准"八咏诗路"折页 / AR卡牌</div>'+
+   '<div class="ar-verse" id="arVerse"></div>'+
+   '<div class="pill-row" style="justify-content:center"><button class="btn btn-sm" style="background:rgba(255,255,255,.16);color:#fff" onclick="prevAR()">‹ 上一景</button>'+
+   '<button class="btn btn-gold btn-sm" onclick="playAR('+arIdx+')">唤起虚拟沈约</button>'+
+   '<button class="btn btn-sm" style="background:rgba(255,255,255,.16);color:#fff" onclick="nextAR()">下一景 ›</button></div></div>'+
+ '<div class="sec"><div class="sec-h"><span class="t">AR 卡牌节点<small>8 NODES</small></span></div><div class="card pad" style="padding:4px 14px">'+list+'</div></div>'+
+ '<div class="note">扫码折页或卡牌即唤起<b>虚拟沈约</b>，诵读对应诗句、播放节点动画；生成的 AR 视频可存入<b>个人中心 · 我的八咏</b>。</div>';
+}
+function prevAR(){arIdx=(arIdx+ZONES.length-1)%ZONES.length;reRender('ar');}
+function nextAR(){arIdx=(arIdx+1)%ZONES.length;reRender('ar');}
+function playAR(i){arIdx=i;if(current!=='ar'){go('ar',true);}
+ const z=ZONES[i];const fig=document.getElementById('arFig');const tip=document.getElementById('arTip');const v=document.getElementById('arVerse');
+ if(!fig){setTimeout(()=>playAR(i),50);return;}
+ tip.textContent='识别中…';fig.textContent=z.no;v.innerHTML='';clearInterval(arTimer);
+ setTimeout(()=>{tip.textContent='✓ 已唤起 · '+z.kw+' · '+z.name.replace('（笼式足球场）','');
+   fig.style.transform='scale(1.05)';let full='虚拟沈约：'+z.verse;let k=0;
+   arTimer=setInterval(()=>{if(k<=full.length){v.innerHTML=full.slice(0,k)+'<span class="cursor">▍</span>';k++;}else{clearInterval(arTimer);v.innerHTML=full;}},45);
+   toast('🎬 AR 动画播放 · 已存入个人中心');
+ },700);
+}
+function reRender(id){if(current===id){const el=document.getElementById('pg-'+id);el.innerHTML=renderers[id]();}}
+
+/* ============================================================
+   渲染：AIGC 共创
+   ============================================================ */
+let aigcTab=0,aigcSeed='';
+const AIGC_MODES=[{n:'写家书',pl:'写我的八咏'},{ph:'写下你想对家人说的话…',t:'家书 · 古风家训'},{ph:'写下你的感悟…',t:'当代诗篇'}];
+renderers.aigc=function(){
+ const tabs=['写家书','写我的八咏','为舍北写一首诗'].map((t,i)=>'<div class="tb '+(i===aigcTab?'on':'')+'" onclick="aigcTab='+i+';go(\'aigc\',true)">'+t+'</div>').join('');
+ const phs=['写下你想对家人说的话（如：愿平安、勤学、归家）…','写下你在诗路上的感悟（如：登高的开阔）…','写下你对舍北的印象（如：稻田、围巾、月夜）…'];
+ let saved='';state.poems.slice().reverse().forEach(p=>{saved+='<div class="cell"><div class="ci">📜</div><div class="ct"><div class="a">'+p.t+'</div><div class="b">'+p.lines.join(' · ').slice(0,30)+'…</div></div><span class="tag gold">已存</span></div>';});
+ return '<div class="tabs" style="margin-top:8px">'+tabs+'</div>'+
+ '<div class="card pad" style="margin-top:14px">'+
+   '<textarea class="inp" id="aigcInp" placeholder="'+phs[aigcTab]+'"></textarea>'+
+   '<div class="pill-row" style="margin-top:10px;flex-wrap:wrap">'+
+     ['感悟','登临','思乡','勤学','竹','月','稻田','围巾','春风'].map(w=>'<span class="chip" style="padding:5px 10px;font-size:12px" onclick="addWord(\''+w+'\')">'+w+'</span>').join('')+
+   '</div>'+
+   '<button class="btn btn-p btn-block" style="margin-top:14px" onclick="runAIGC()">✨ AI 生成</button>'+
+ '</div>'+
+ '<div id="aigcResult"></div>'+
+ '<div class="note">游客输入感悟，AI 生成<b>古风诗 / 家训</b>，可保存、打印、<b>投影至线下诗墙</b>；优秀作品纳入<b>年度诗展</b>，并同步至个人中心。</div>'+
+ (state.poems.length?'<div class="sec"><div class="sec-h"><span class="t">我的数字诗笺<small>DRAFTS</small></span></div><div class="card pad" style="padding:4px 14px">'+saved+'</div></div>':'');
+}
+function addWord(w){const i=document.getElementById('aigcInp');i.value+=(i.value&&!i.value.match(/[，。、,]$/)?'，':'')+w;i.focus();}
+const POOL={
+ opener:['登台','望月','怀人','咏竹','听风','临水','望秋','感雪'],
+ img:['月照万善桥','风过听风坪','稻浪起新安','竹影落碑前','霜染庭中树','水映归乡人','纱动诗千行','灯圆生肖桥'],
+ mind:['心随境自远','志坚山不移','虚心存劲节','澄怀可照心','一步一回首','此心安是乡'],
+ wish:['愿君多珍重','勤学莫负春','平安抵万金','归家煮新茶','把酒话桑麻','诗书济世长']
+};
+function runAIGC(){const inp=document.getElementById('aigcInp').value.trim();
+ const seed=inp+Date.now();let h=0;for(const c of seed)h=(h*31+c.charCodeAt(0))>>>0;
+ const pick=a=>a[h%a.length];h=(h*7+3)>>>0;
+ let title=['一封家书','我的八咏','舍北即事'][aigcTab];
+ let lines;
+ if(aigcTab===0){lines=[pick(POOL.img),pick(POOL.wish),pick(POOL.mind),'见字如晤，勿念。'];}
+ else{lines=[pick(POOL.opener)+'行'+pick(POOL.img),pick(POOL.img)+'，'+pick(POOL.mind),pick(POOL.mind)+'，'+pick(POOL.wish),pick(POOL.wish)+'，'+title+'成'];}
+ const box=document.getElementById('aigcResult');
+ box.innerHTML='<div class="poem-out typing"><div class="pt">· '+title+' ·</div><div class="pl" id="aigcLines"></div>'+
+   '<div style="font-size:11px;color:var(--ink-3);margin-top:12px">据你的感悟由 AI 生成 · 仅供参考</div>'+
+   '<div class="pill-row" style="justify-content:center;margin-top:14px">'+
+     '<button class="btn btn-g btn-sm" onclick="savePoem(\''+title+'\',\''+lines.join('|')+'\')">💾 保存</button>'+
+     '<button class="btn btn-g btn-sm" onclick="toast(\'🖨️ 已发送打印（演示）\')">🖨️ 打印</button>'+
+     '<button class="btn btn-gold btn-sm" onclick="toast(\'🔦 已投影至线下诗墙\')">🔦 投影诗墙</button></div></div>';
+ const target=document.getElementById('aigcLines');let idx=0;
+ const iv=setInterval(()=>{if(idx<lines.length){target.innerHTML+=(idx?'<br>':'')+'<span style="animation-delay:'+(idx*.1)+'s">'+lines[idx]+'</span>';idx++;}else clearInterval(iv);},120);
+}
+function savePoem(t,l){state.poems.push({t:t,lines:l.split('|'),time:'刚刚'});state.points+=10;toast('📜 已存入「我的数字诗笺」· +10积分');}
+
+/* ============================================================
+   渲染：集章打卡
+   ============================================================ */
+renderers.stamp=function(){
+ const n=stampedCount();
+ let grid=ZONES.map((z,i)=>{const done=state.stamps[z.id];
+   return '<div class="zcard" onclick="stampAction(\''+z.id+'\','+i+')"><div class="zc-top" style="background:'+(done?'linear-gradient(150deg,'+z.color+',#00000022)':'#EFEBDD')+'">'+
+     '<div style="position:relative;width:64px;height:64px;border-radius:14px;border:2.5px solid '+(done?'#fff':'var(--line)')+';display:flex;flex-direction:column;align-items:center;justify-content:center;'+(done?'box-shadow:inset 0 0 0 3px rgba(255,255,255,.25);':'opacity:.5')+'">'+
+     '<div style="font-family:var(--title);font-size:22px;font-weight:700;color:'+(done?'#fff':z.color)+';line-height:1">'+z.no+'</div>'+
+     '<div style="font-size:9px;color:'+(done?'#fff':z.color)+';letter-spacing:1px;margin-top:2px">'+z.kw.split('·')[0]+'</div></div>'+
+     '<span class="zc-no" style="background:'+(done?'rgba(0,0,0,.28)':'rgba(0,0,0,.06)')+';color:'+(done?'#fff':'var(--ink-3)')+'">'+(done?'✓ 已集':'未集')+'</span></div>'+
+     '<div class="zc-body"><div class="n">'+z.name.replace('（笼式足球场）','')+'</div><div class="k">'+z.kw+'</div><div class="v">'+(done?'点击查看详情':'扫码 / AR 触发盖章')+'</div></div></div>';
+ }).join('');
+ let reward='<div class="card pad" style="display:flex;align-items:center;gap:12px;margin-top:6px;background:linear-gradient(135deg,#FFF7E9,#FBEFD8);border:1px solid var(--gold-soft)">'+
+   '<div style="font-size:30px">'+(n===8?'🎁':'🔒')+'</div><div style="flex:1"><div style="font-family:var(--title);font-weight:700">集满八章 · 兑换文创小礼</div><div style="font-size:12px;color:#8a6a2f;margin-top:3px">'+(n===8?'恭喜！可至游客中心领取专属礼遇':'已集 '+n+' / 8，继续前行解锁下一枚')+'</div></div>'+
+   '<button class="btn '+(n===8?'btn-gold':'btn-g')+' btn-sm" '+(n===8?'onclick="toast(\'🎁 兑换成功，感谢同行！\')"':'disabled style="opacity:.5"')+' onclick="go(\'mall\')">兑换</button></div>';
+ return '<div class="prog" style="margin-top:8px"><div class="pr-top"><span class="lbl">诗路集章</span><span class="num">已集 <b>'+n+'</b> / 8</span></div><div class="bar"><i style="width:'+(n/8*100)+'%"></i></div></div>'+
+ reward+
+ '<div class="sec"><div class="sec-h"><span class="t">八枚印章<small>8 SEALS</small></span><span class="more" onclick="autoStamp()">一键演示集满 ›</span></div><div class="grid2">'+grid+'</div></div>'+
+ '<div class="note">八枚印章对应八展区：<b>登台立志 · 怀人仰贤 · 咏竹明志 · 听风逐风 · 对月咏怀 · 望秋知序 · 临水照心 · 感雪归乡</b>。扫码或 AR 触发盖章，集满八章兑换文创小礼。</div>';
+}
+function stampAction(id,i){if(!state.stamps[id]){state.stamps[id]=true;state.points+=15;toast('🔏 已盖「'+ZONES[i].kw+'」章 · +15积分');}
+ openZone(id);go('stamp',true);
+}
+function autoStamp(){ZONES.forEach(z=>state.stamps[z.id]=true);toast('✨ 演示模式：已集满八章');go('stamp',true);}
+
+/* ============================================================
+   渲染：云展馆
+   ============================================================ */
+renderers.cloud=function(){
+ let tl=[['南朝·441','沈约生于建康'],['少时','博通典籍，工诗文'],['齐·竟陵王','入"竟陵八友"文坛'],['论四声','创"四声八病"说'],['守东阳','登玄畅楼作《八咏诗》'],['梁·官至','尚书左仆射'],['513','卒，谥"隐"']].map(x=>'<div class="li-item"><span class="lb">'+x[0]+'</span><span>'+x[1]+'</span></div>').join('');
+ return '<div class="hero" style="margin:6px -16px 0;padding:24px 20px 26px;background:linear-gradient(150deg,#26332C,#3E665F 60%,#4E828A)">'+
+   '<div class="h-kicker">数字云展 · 线下延伸</div><h1 style="font-size:26px">云展馆</h1><div class="h-sub">八景图文 · 诗眼 · 语音讲解 · 数字长卷</div></div>'+
+ '<div class="sec"><div class="sec-h"><span class="t">八咏诗境动画<small>SCROLL</small></span></div>'+
+   '<div class="hscroll">'+ZONES.map(z=>'<div class="scard" style="width:132px;background:linear-gradient(160deg,'+z.color+',#00000028)" onclick="openZone(\''+z.id+'\')"><div class="sc-bg" style="height:120px">'+art(z.art,'#fff',40)+'</div><div class="sc-body"><div class="n">'+z.kw+'</div><div class="d">'+z.verse+'</div></div></div>').join('')+'</div></div>'+
+ '<div class="sec"><div class="sec-h"><span class="t">四声八病 · 格律互动<small>PROSODY</small></span></div>'+
+   '<div class="card pad">'+['平 · 哀/开/来','上 · 少/柳/月','去 · 送/梦/处','入 · 竹/木/目'].map((p,i)=>'<div class="cell" onclick="toast(\'🔊 播放「'+p.slice(2,3)+'」声调示例\')" style="border-bottom:1px solid var(--line-2)"><div class="ci" style="background:var(--gold-soft);color:#8a6a2f">'+p[0]+'</div><div class="ct"><div class="a">'+p.slice(4)+'</div><div class="b">点按试听（演示）</div></div><div class="arr">▶</div></div>').join('')+
+   '<div style="font-size:12px;color:var(--ink-3);margin-top:8px;line-height:1.7">沈约以"四声"配"八病"，开近体格律先声。此处可互动体验一句诗的平仄起伏。</div></div></div>'+
+ '<div class="sec"><div class="sec-h"><span class="t">沈约生平时间轴<small>TIMELINE</small></span></div><div class="card pad">'+tl+'</div></div>'+
+ '<div class="sec"><div class="sec-h"><span class="t">短视频 · 语音讲解<small>MEDIA</small></span></div><div class="grid2">'+
+   ZONES.slice(0,4).map(z=>'<div class="goods" style="cursor:pointer" onclick="openZone(\''+z.id+'\')"><div class="g-cover" style="background:linear-gradient(150deg,'+z.color+',#00000022)">'+art(z.art,'#fff',40)+'</div><div class="g-body"><div class="g-name">'+z.kw+' · 语音讲解</div><div class="g-desc">时长 2′18″ · 数字长卷 · 诗境短片</div></div></div>').join('')+
+ '</div></div>'+syncNote();
+}
+
+/* ============================================================
+   渲染：研学预约
+   ============================================================ */
+let bkPick=0;
+renderers.book=function(){
+ const p=COURSES[bkPick];
+ let course=COURSES.map((c,i)=>'<div class="card pad" style="margin-bottom:10px;'+(i===bkPick?'border:1.5px solid var(--jade)':'')+'" onclick="bkPick='+i+';go(\'book\',true)">'+
+   '<div style="display:flex;justify-content:space-between;align-items:center"><div style="font-family:var(--title);font-weight:700;font-size:16px">'+c.name+'</div><div class="price" style="color:var(--rose);font-family:var(--title);font-weight:700">¥'+c.price+'</div></div>'+
+   '<div style="margin-top:6px" class="pill-row"><span class="tag">'+c.dur+'</span><span class="tag water">'+c.n+'</span><span class="tag gold">'+c.nodes+'</span></div>'+
+   '<div style="font-size:12.5px;color:var(--ink-2);margin-top:8px;line-height:1.6">'+c.desc+'</div></div>').join('');
+ let myb=state.bookings.map(b=>'<div class="cell"><div class="ci" style="background:var(--jade-soft);color:var(--jade-2)">🎫</div><div class="ct"><div class="a">'+b.name+'</div><div class="b">'+b.date+' · '+b.people+' · '+b.contact+'</div></div><span class="tag">待核销</span></div>').join('');
+ return '<div class="sec-h" style="margin-top:8px"><span class="t">选择课程<small>COURSES</small></span></div>'+course+
+ '<div class="card pad" style="margin-top:4px"><div style="font-family:var(--title);font-weight:700;font-size:15px;margin-bottom:10px">预约 · '+p.name+'</div>'+
+   '<div class="field"><label>体验日期</label><input type="date" id="bkDate"></div>'+
+   '<div class="field"><label>参与人数</label><select id="bkPeople"><option>成人 1 名</option><option>成人 2 名</option><option>亲子 1大1小</option><option>亲子 2大1小</option><option>团队 10 名起</option></select></div>'+
+   '<div class="field"><label>联系电话</label><input id="bkTel" placeholder="用于预约核销" inputmode="tel"></div>'+
+   '<button class="btn btn-p btn-block" onclick="submitBook()">提交预约 · ¥'+p.price+'</button>'+
+   '<div style="font-size:11px;color:var(--ink-3);text-align:center;margin-top:8px">支持微信支付 · 到店出示核销码</div></div>'+
+ (state.bookings.length?'<div class="sec"><div class="sec-h"><span class="t">我的预约<small>MY BOOKINGS</small></span></div><div class="card pad" style="padding:4px 14px">'+myb+'</div></div>':'');
+}
+function submitBook(){const p=COURSES[bkPick];const d=document.getElementById('bkDate').value||'待选择';const pe=document.getElementById('bkPeople').value;const t=document.getElementById('bkTel').value||'待补充';
+ state.bookings.push({name:p.name,date:d,people:pe,contact:t});toast('✅ 预约成功 · 已加入「我的预约」');go('book',true);
+}
+
+/* ============================================================
+   渲染：文创商城
+   ============================================================ */
+let mallCat='全部';
+renderers.mall=function(){
+ const cats=['全部','大众消费','研学伴手礼'];
+ let list=GOODS.filter(g=>mallCat==='全部'||g.cat===mallCat).map(g=>'<div class="goods"><div class="g-cover" style="background:linear-gradient(150deg,'+g.c1+','+g.c2+')">'+g.name.slice(0,5)+'</div>'+
+   '<div class="g-body"><div class="g-name">'+g.name+'</div><div class="g-desc">'+g.desc+'</div>'+
+   '<div class="g-foot"><div class="price"><small>¥</small>'+g.price+'</div><button class="add" onclick="addCart(\''+g.id+'\')">+</button></div></div></div>').join('');
+ const cnt=cartCount();
+ return '<div class="hscroll" style="margin-top:10px">'+cats.map(c=>'<div class="chip '+(c===mallCat?'on':'')+'" onclick="mallCat=\''+c+'\';go(\'mall\',true)">'+c+'</div>').join('')+'</div>'+
+ '<div style="font-size:12px;color:var(--ink-3);margin:10px 2px">分大众消费类与研学伴手礼类 · 支持购物车、微信支付、扫码直邮</div>'+
+ '<div class="grid2">'+list+'</div>'+
+ '<div style="height:20px"></div>'+
+ '<div class="cart-bar" style="position:absolute;left:0;right:0;bottom:74px;background:rgba(255,255,255,.96);backdrop-filter:blur(10px);border-top:1px solid var(--line);z-index:30">'+
+   '<div style="display:flex;align-items:center;gap:10px"><div style="width:42px;height:42px;border-radius:50%;background:var(--jade);color:#fff;display:flex;align-items:center;justify-content:center;position:relative;cursor:pointer" onclick="openCart()">🛒'+(cnt?'<span style="position:absolute;top:-4px;right:-4px;background:var(--rose);color:#fff;font-size:10px;border-radius:999px;padding:1px 5px;min-width:16px">'+cnt+'</span>':'')+'</div><div class="tot">合计 <b>¥'+cartTotal().toFixed(1)+'</b></div></div>'+
+   '<button class="btn btn-p" onclick="openCart()">去结算</button></div>';
+}
+function cartCount(){return Object.values(state.cart).reduce((a,b)=>a+b,0);}
+function cartTotal(){return Object.entries(state.cart).reduce((a,[id,q])=>a+GOODS.find(g=>g.id===id).price*q,0);}
+function addCart(id){state.cart[id]=(state.cart[id]||0)+1;const g=GOODS.find(x=>x.id===id);toast('🛒 已加入购物车 · '+g.name);if(current==='mall')reRender('mall');}
+function openCart(){const items=Object.entries(state.cart);
+ if(!items.length){openSheet('购物车','<div class="empty"><div style="font-size:40px">🛒</div><div>购物车还是空的</div><div style="font-size:12px;margin-top:6px">去挑一件诗路文创吧</div></div>');return;}
+ let lines=items.map(([id,q])=>{const g=GOODS.find(x=>x.id===id);return '<div class="cart-line"><div style="width:44px;height:44px;border-radius:10px;background:linear-gradient(150deg,'+g.c1+','+g.c2+')"></div><div class="cl-n">'+g.name+'</div>'+
+   '<div class="stepper"><button onclick="chQty(\''+id+'\',-1)">−</button><span>'+q+'</span><button onclick="chQty(\''+id+'\',1)">+</button></div><div class="cl-p">¥'+(g.price*q).toFixed(1)+'</div></div>';}).join('');
+ openSheet('购物车',lines+'<div style="height:10px"></div>'+
+   '<div class="pill-row" style="margin-top:6px"><button class="btn btn-g btn-sm" onclick="toast(\'📮 已选扫码直邮\')">📮 扫码直邮</button></div>'+
+   '<div class="cart-bar" style="border-top:1px solid var(--line);margin:12px -18px -18px;padding:14px 18px;border-radius:0"><div class="tot">合计 <b>¥'+cartTotal().toFixed(1)+'</b></div><button class="btn btn-p" onclick="pay()">微信支付</button></div>');
+}
+function chQty(id,d){state.cart[id]=(state.cart[id]||0)+d;if(state.cart[id]<=0)delete state.cart[id];openCart();if(current==='mall')reRender('mall');}
+function pay(){if(!cartCount())return;const amt=cartTotal().toFixed(1);
+ state.orders.push({name:Object.keys(state.cart).map(id=>GOODS.find(g=>g.id===id).name).join('、'),amt:amt,time:'刚刚',qty:cartCount()});
+ state.points+=Math.round(amt);state.cart={};closeSheet();toast('✅ 支付成功 · 订单已生成 · +积分');if(current==='mall')reRender('mall');
+}
+
+/* ============================================================
+   渲染：个人中心
+   ============================================================ */
+renderers.mine=function(){
+ const n=stampedCount();
+ let orders=state.orders.map(o=>'<div class="cell"><div class="ci" style="background:var(--rose-soft);color:var(--rose)">📦</div><div class="ct"><div class="a">'+o.name.slice(0,16)+'</div><div class="b">'+o.time+' · 共 '+o.qty+' 件</div></div><div class="cv">¥'+o.amt+'</div></div>').join('')||'<div class="empty" style="padding:20px">暂无订单</div>';
+ let poems=state.poems.length?state.poems.slice().reverse().map(p=>'<div class="cell" onclick="openPoem()"><div class="ci">📜</div><div class="ct"><div class="a">'+p.t+'</div><div class="b">'+p.lines.join(' · ').slice(0,26)+'…</div></div><span class="tag gold">诗笺</span></div>').join(''):'<div class="empty" style="padding:20px">还没有作品，去 AIGC 共创写一首 ›</div>';
+ return '<div class="mine-hero"><div class="av">约</div><div class="mi" style="flex:1"><div class="n">舍北 · 诗友</div><div class="l">'+state.vip+'</div></div><div style="text-align:right"><div style="font-family:var(--title);font-size:22px;font-weight:700">'+state.points+'</div><div style="font-size:11px;opacity:.85">积分</div></div></div>'+
+ '<div class="stat3" style="margin-top:14px"><div class="st"><b>'+n+'</b><span>我的集章</span></div><div class="st"><b>'+state.orders.length+'</b><span>我的订单</span></div><div class="st"><b>'+state.bookings.length+'</b><span>我的预约</span></div></div>'+
+ '<div class="sec"><div class="sec-h"><span class="t">我的数字诗笺 / 我的八咏<small>WORKS</small></span><span class="more" onclick="go(\'aigc\')">去创作 ›</span></div><div class="card pad" style="padding:4px 14px">'+poems+'</div></div>'+
+ '<div class="sec"><div class="sec-h"><span class="t">我的订单<small>ORDERS</small></span></div><div class="card pad" style="padding:4px 14px">'+orders+'</div></div>'+
+ '<div class="sec"><div class="card" style="padding:4px 14px">'+
+   mineCell('🎫','我的预约',state.bookings.length+' 条','book')+
+   mineCell('🔏','我的集章',n+' / 8 枚','stamp')+
+   mineCell('🏅','会员权益','雅集会员 · 兑换/直邮','') +
+ '</div></div>'+syncNote();
+}
+function mineCell(i,a,b,pg){
+ var click = pg ? "go('"+pg+"')" : "toast('会员权益：集章兑换、扫码直邮、专属诗笺打印')";
+ return '<div class="cell" onclick="'+click+'"><div class="ci">'+i+'</div><div class="ct"><div class="a">'+a+'</div></div><div class="cv">'+b+'</div><div class="arr">›</div></div>';
+}
+function openPoem(){const p=state.poems[state.poems.length-1];if(!p)return;
+ openSheet('我的数字诗笺','<div class="poem-out"><div class="pt">· '+p.t+' ·</div><div class="pl">'+p.lines.join('<br>')+'</div></div>'+
+   '<div class="pill-row" style="justify-content:center;margin-top:14px"><button class="btn btn-g btn-sm" onclick="toast(\'🖨️ 已发送打印\')">打印</button><button class="btn btn-gold btn-sm" onclick="toast(\'🔦 已投影至线下诗墙\')">投影诗墙</button></div>');
+}
+
+/* ============================================================
+   渲染：服务设施
+   ============================================================ */
+renderers.svc=function(){
+ let list=SERVICES.map(s=>'<div class="cell" onclick="toast(\'📍 导航至「'+s.a+'」（演示）\')"><div class="ci" style="font-size:20px;background:var(--water-soft)">'+s.i+'</div>'+
+   '<div class="ct"><div class="a">'+s.a+'</div><div class="b">'+s.b+'</div></div><div class="cv">'+s.c+'</div></div>').join('');
+ let fest=EVENTS.map(e=>'<div class="li-item" style="border-bottom:1px solid var(--line-2)"><span class="lb" style="color:var(--jade)">'+e.d+'</span><span><b style="font-family:var(--title)">'+e.n+'</b> · '+e.p+'</span></div>').join('');
+ return '<div class="sec-h" style="margin-top:8px"><span class="t">服务设施<small>FACILITIES</small></span></div><div class="card pad" style="padding:4px 14px">'+list+'</div>'+
+ '<div class="sec"><div class="sec-h"><span class="t">四季市集时间表<small>FESTIVALS</small></span><span class="more" onclick="go(\'cal\')">活动日历 ›</span></div><div class="card pad">'+fest+'</div></div>';
+}
+
+/* ============================================================
+   渲染：活动日历
+   ============================================================ */
+renderers.cal=function(){
+ let list=EVENTS.map(e=>'<div class="card" style="overflow:hidden;margin-bottom:12px"><div style="height:6px;background:'+EVBG[e.s]+'"></div><div class="pad">'+
+   '<div style="display:flex;justify-content:space-between;align-items:center"><div style="font-family:var(--title);font-weight:700;font-size:16px">'+e.n+'</div><span class="tag">'+e.d+'</span></div>'+
+   '<div style="font-size:12.5px;color:var(--ink-2);margin-top:6px">📍 '+e.p+'</div>'+
+   '<div style="font-size:12px;color:var(--ink-3);margin-top:6px;line-height:1.6">'+e.t+'</div>'+
+   '<div style="margin-top:10px"><button class="btn btn-g btn-sm" onclick="toast(\'📅 已加入提醒，活动前将通知你\')">🔔 订阅提醒</button></div></div></div>').join('');
+ return '<div class="hero" style="margin:6px -16px 0;padding:22px 20px 22px;background:linear-gradient(150deg,#8a6a2f,#B98B3E 55%,#CBA25C)">'+
+   '<div class="h-kicker">诗路 · 全年不落幕</div><h1 style="font-size:26px">活动日历</h1><div class="h-sub">四季市集 · 月光夜市 · 八咏诗会</div></div>'+
+ '<div class="sec">'+list+'</div>';
+}
+
+/* ============================================================
+   展区详情 Overlay
+   ============================================================ */
+function openZone(id){const z=ZONES.find(x=>x.id===id);
+ const scenes=z.scenes.map(s=>'<div class="li-item"><span class="lb">◈</span><span>'+s+'</span></div>').join('');
+ const exps=z.exps.map(s=>'<div class="exp-item">'+s+'</div>').join('');
+ const link=z.link.map(s=>'<li>'+s+'</li>').join('');
+ const done=state.stamps[id];
+ document.getElementById('ovTitle').textContent=z.kw;
+ document.getElementById('ovScroll').innerHTML='<div class="ov-body"><div class="ov-hero" style="background:linear-gradient(150deg,'+z.color+',#00000028)">'+
+   '<svg class="bigart">'+ART[z.art].replace(/stroke-linecap="round"/g,'').replace(/opacity="[^"]*"/g,'').replace(/<path /g,'<path fill="#fff" stroke="none" ').replace(/<circle /g,'<circle fill="#fff" stroke="none" ')+'</svg>'+
+   '<div class="no">'+z.no+' · '+z.stage+' · '+z.village+'</div><h2>'+z.name.replace('（笼式足球场）','')+'</h2>'+
+   '<div class="kw">'+z.kw+' — 《八咏诗·'+z.poem+'》</div><div class="verse">'+z.verse+'</div></div>'+
+ '<div style="margin-top:16px;display:flex;gap:8px;flex-wrap:wrap"><span class="tag">'+z.tag+'</span><span class="tag water">'+z.village+'</span>'+(done?'<span class="tag rose">✓ 已集章</span>':'')+'</div>'+
+ '<div class="ov-h">诗意解读</div><div style="font-size:13.5px;color:var(--ink-2);line-height:1.9">'+z.intent+'</div>'+
+ '<div class="ov-h">展陈场景</div>'+scenes+
+ '<div class="ov-h">体验动线</div>'+exps+
+ '<div class="link"><div class="lk-h">🔗 实地联动 · 数字云展</div><ul>'+link+'</ul></div>'+
+ '<div class="ov-h">讲解词</div><div style="font-family:var(--title);font-size:14px;color:var(--jade-2);line-height:1.9">'+z.guide+'</div>'+
+ syncNote()+'</div>';
+ const foot=document.getElementById('ovFoot');
+ foot.innerHTML='<button class="btn btn-g" style="flex:1" onclick="closeOverlay();go(\'map\')">在导览中查看</button>'+
+   '<button class="btn '+(done?'btn-g':'btn-p')+'" style="flex:1" onclick="ovStamp(\''+id+'\','+ZONES.indexOf(z)+')" '+(done?'disabled style="flex:1;opacity:.6"':'')+'>'+(done?'✓ 已集章':'🔏 扫码盖章')+'</button>';
+ foot.style.display='flex';
+ document.getElementById('overlay').classList.add('show');
+}
+function ovStamp(id,i){stampAction(id,i);closeOverlay();}
+function closeOverlay(){document.getElementById('overlay').classList.remove('show');document.getElementById('ovFoot').style.display='none';}
+
+/* ============================================================
+   时钟 & 启动
+   ============================================================ */
+function clock(){const d=new Date();let h=d.getHours(),m=('0'+d.getMinutes()).slice(-2);document.getElementById('clock').textContent=h+':'+m;}
+clock();setInterval(clock,20000);
+document.getElementById('pg-home').innerHTML=renderers.home();
+// 预渲染一次以填充其它页
+</script>
+</body>
+</html>
